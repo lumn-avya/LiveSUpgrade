@@ -1,0 +1,65 @@
+{
+  "name": "local-dev-server",
+  "displayName": "local-dev-server",
+  "description": "A live server replacement with Phase 4 Debugger Integration.",
+  "version": "0.0.4",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "local-dev-server.start",
+        "title": "Start Live Server"
+      },
+      {
+        "command": "local-dev-server.stop",
+        "title": "Stop Live Server"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "local-dev-debugger",
+        "label": "Local Dev Server Live Debugger",
+        "languages": [
+          "html",
+          "javascript"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.90.0",
+    "@types/ws": "^8.18.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^9.4.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@vscode/debugadapter": "^1.65.0",
+    "http-proxy-middleware": "^2.0.7",
+    "ws": "^8.18.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
